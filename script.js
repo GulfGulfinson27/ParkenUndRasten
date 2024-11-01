@@ -24,7 +24,7 @@ var init = function () {
     if (loaded) return;
     loaded = true;
     var mobile = window.isDevice;
-    var koef = mobile ? 0.5 : 1; // Zoom-Faktor für mobile Geräte
+    var koef = mobile ? 0.3 : 1; // Zoom-Faktor für mobile Geräte
     var canvas = document.getElementById('heart');
     var ctx = canvas.getContext('2d');
     var resizeCanvas = function () {
@@ -86,7 +86,7 @@ var init = function () {
             q: ~~(rand() * heartPointsCount),
             D: 2 * (i % 2) - 1,
             force: 0.2 * rand() + 0.7,
-            f: mobile ? "hsla(0," + ~~(40 * rand() + 60) + "%," + ~~(80 * rand() + 40) + "%,.3)" : "hsla(0," + ~~(40 * rand() + 60) + "%," + ~~(60 * rand() + 20) + "%,.3)", // Heller auf mobilen Geräten
+            f: "hsla(0," + ~~(40 * rand() + 60) + "%," + ~~(60 * rand() + 20) + "%,.3)", // Kräftigeres Rot
             trace: []
         };
         for (var k = 0; k < traceCount; k++) e[i].trace[k] = { x: x, y: y };
@@ -146,9 +146,9 @@ var init = function () {
             }
         }
 
-                // Leuchtender Hintergrund um die Mitte des Canvas
+        // Leuchtender Hintergrund um die Mitte des Canvas
         var gradient = ctx.createRadialGradient(width / 2, height / 2, 0, width / 2, height / 2, width / 2);
-        gradient.addColorStop(0, 'rgba(0, 0, 139, 0.04)'); // Dunkleres Blau und deutlich transparent
+        gradient.addColorStop(0, 'rgba(0, 0, 139, 0.02)'); // Dunkleres Blau und deutlich transparent
         gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
         ctx.fillStyle = gradient;
         ctx.fillRect(0, 0, width, height);
