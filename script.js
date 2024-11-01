@@ -23,9 +23,17 @@ var init = function () {
     if (loaded) return;
     loaded = true;
     var mobile = window.isDevice;
-    var koef = mobile ? 0.5 : 1;
+    var koef = mobile ? 1 : 1;
     var canvas = document.getElementById('heart');
     var ctx = canvas.getContext('2d');
+    var resizeCanvas = function() {
+        canvas.width = koef * window.innerWidth;
+        canvas.height = koef * window.innerHeight;
+        ctx.fillStyle = "rgba(0,0,0,1)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    };
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
     var width = canvas.width = koef * innerWidth;
     var height = canvas.height = koef * innerHeight;
     var rand = Math.random;
