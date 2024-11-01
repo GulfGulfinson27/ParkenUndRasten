@@ -24,7 +24,7 @@ var init = function () {
     if (loaded) return;
     loaded = true;
     var mobile = window.isDevice;
-    var koef = mobile ? 1 : 1;
+    var koef = mobile ? 0.8 : 1; // Zoom-Faktor für mobile Geräte
     var canvas = document.getElementById('heart');
     var ctx = canvas.getContext('2d');
     var resizeCanvas = function () {
@@ -86,7 +86,7 @@ var init = function () {
             q: ~~(rand() * heartPointsCount),
             D: 2 * (i % 2) - 1,
             force: 0.2 * rand() + 0.7,
-            f: "hsla(0," + ~~(40 * rand() + 60) + "%," + ~~(60 * rand() + 20) + "%,.3)",
+            f: mobile ? "hsla(0," + ~~(40 * rand() + 60) + "%," + ~~(80 * rand() + 40) + "%,.3)" : "hsla(0," + ~~(40 * rand() + 60) + "%," + ~~(60 * rand() + 20) + "%,.3)", // Heller auf mobilen Geräten
             trace: []
         };
         for (var k = 0; k < traceCount; k++) e[i].trace[k] = { x: x, y: y };
@@ -158,10 +158,12 @@ var init = function () {
 
     canvas.addEventListener('touchstart', function () {
         growing = true;
+        document.getElementById('touch-text').style.display = 'block'; // Text anzeigen
     });
 
     canvas.addEventListener('touchend', function () {
         growing = false;
+        document.getElementById('touch-text').style.display = 'none'; // Text ausblenden
     });
 
     var scaleLoop = function () {
@@ -186,4 +188,3 @@ var init = function () {
 var s = document.readyState;
 if (s === 'complete' || s === 'loaded' || s === 'interactive') init();
 else document.addEventListener('DOMContentLoaded', init, false);
-//penis
