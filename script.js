@@ -24,7 +24,7 @@ var init = function () {
     if (loaded) return;
     loaded = true;
     var mobile = window.isDevice;
-    var koef = mobile ? 0.8 : 1; // Zoom-Faktor für mobile Geräte
+    var koef = mobile ? 0.5 : 1; // Zoom-Faktor für mobile Geräte
     var canvas = document.getElementById('heart');
     var ctx = canvas.getContext('2d');
     var resizeCanvas = function () {
@@ -145,6 +145,14 @@ var init = function () {
                 ctx.fillRect(u.trace[k].x, u.trace[k].y, 1, 1);
             }
         }
+
+                // Leuchtender Hintergrund um die Mitte des Canvas
+        var gradient = ctx.createRadialGradient(width / 2, height / 2, 0, width / 2, height / 2, width / 2);
+        gradient.addColorStop(0, 'rgba(0, 0, 139, 0.04)'); // Dunkleres Blau und deutlich transparent
+        gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, width, height);
+
         window.requestAnimationFrame(loop, canvas);
     };
 
@@ -158,12 +166,10 @@ var init = function () {
 
     canvas.addEventListener('touchstart', function () {
         growing = true;
-        document.getElementById('touch-text').style.display = 'block'; // Text anzeigen
     });
 
     canvas.addEventListener('touchend', function () {
         growing = false;
-        document.getElementById('touch-text').style.display = 'none'; // Text ausblenden
     });
 
     var scaleLoop = function () {
