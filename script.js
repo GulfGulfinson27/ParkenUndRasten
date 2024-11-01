@@ -24,7 +24,7 @@ var init = function () {
     if (loaded) return;
     loaded = true;
     var mobile = window.isDevice;
-    var koef = mobile ? 3 : 1; // Zoom-Faktor für mobile Geräte
+    var koef = mobile ? 0.01 : 1; // Zoom-Faktor für mobile Geräte
     var canvas = document.getElementById('heart');
     var ctx = canvas.getContext('2d');
     var resizeCanvas = function () {
