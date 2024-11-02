@@ -24,7 +24,7 @@ var init = function () {
     if (loaded) return;
     loaded = true;
     var mobile = window.isDevice;
-    var koef = mobile ? 2 : 1; // Zoom-Faktor für mobile Geräte
+    var koef = mobile ? 0.3 : 1; // Zoom-Faktor für mobile Geräte
     var canvas = document.getElementById('heart');
     var ctx = canvas.getContext('2d');
     var resizeCanvas = function () {
@@ -86,7 +86,7 @@ var init = function () {
             q: ~~(rand() * heartPointsCount),
             D: 2 * (i % 2) - 1,
             force: 0.2 * rand() + 0.7,
-            f: "hsla(0," + ~~(40 * rand() + 60) + "%," + ~~(60 * rand() + 20) + "%,.3)", // Kräftigeres Rot
+            f: mobile ? "hsla(0, 100%, 50%, 0.8)" : "hsla(0," + ~~(40 * rand() + 60) + "%," + ~~(60 * rand() + 20) + "%,.3)", // Kräftigeres und leuchtenderes Rot auf mobilen Geräten
             trace: []
         };
         for (var k = 0; k < traceCount; k++) e[i].trace[k] = { x: x, y: y };
